@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Applications/Hushtop.app/Contents/Helpers/mynotch-statusline' ]; then exec '/Applications/Hushtop.app/Contents/Helpers/mynotch-statusline' codex-ask; fi # mynotch-codex-ask",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ d=\"$HOME/Library/Application Support/Hushtop/inbox\"; mkdir -p \"$d\" && chmod 700 \"$d\"; n=$(basename \"${CLAUDE_PROJECT_DIR:-$PWD}\" | tr -cd '[:alnum:]._ -' | cut -c1-80); a=$(printf '%s' \"${__CFBundleIdentifier:-}\" | tr -cd '[:alnum:].-' | cut -c1-120); t=$(printf '%s' \"${TERM_PROGRAM:-}\" | tr -cd '[:alnum:]._+-' | cut -c1-40); y=$(ps -o tty= -p $PPID 2>/dev/null | tr -cd '[:alnum:]' | cut -c1-12); s=$( (head -c 65536; cat >/dev/null) | tr -d '\\n' | sed -n 's/.*\"session_id\"[[:space:]]*:[[:space:]]*\"\\([A-Za-z0-9-]*\\)\".*/\\1/p' | cut -c1-64); f=\"claude-$$-$(date +%s).json\"; printf '{\"agent\":\"claude\",\"project\":\"%s\",\"event\":\"notification\",\"app\":\"%s\",\"term\":\"%s\",\"session\":\"%s\",\"tty\":\"%s\"}' \"$n\" \"$a\" \"$t\" \"$s\" \"$y\" > \"$d/.$f.tmp\" && mv \"$d/.$f.tmp\" \"$d/$f\"; } >/dev/null 2>&1; exit 0 # mynotch-hook"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ d=\"$HOME/Library/Application Support/Hushtop/inbox\"; mkdir -p \"$d\" && chmod 700 \"$d\"; n=$(basename \"${CLAUDE_PROJECT_DIR:-$PWD}\" | tr -cd '[:alnum:]._ -' | cut -c1-80); a=$(printf '%s' \"${__CFBundleIdentifier:-}\" | tr -cd '[:alnum:].-' | cut -c1-120); t=$(printf '%s' \"${TERM_PROGRAM:-}\" | tr -cd '[:alnum:]._+-' | cut -c1-40); y=$(ps -o tty= -p $PPID 2>/dev/null | tr -cd '[:alnum:]' | cut -c1-12); s=$( (head -c 65536; cat >/dev/null) | tr -d '\\n' | sed -n 's/.*\"session_id\"[[:space:]]*:[[:space:]]*\"\\([A-Za-z0-9-]*\\)\".*/\\1/p' | cut -c1-64); f=\"claude-$$-$(date +%s).json\"; printf '{\"agent\":\"claude\",\"project\":\"%s\",\"event\":\"stop\",\"app\":\"%s\",\"term\":\"%s\",\"session\":\"%s\",\"tty\":\"%s\"}' \"$n\" \"$a\" \"$t\" \"$s\" \"$y\" > \"$d/.$f.tmp\" && mv \"$d/.$f.tmp\" \"$d/$f\"; } >/dev/null 2>&1; exit 0 # mynotch-hook"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ d=\"$HOME/Library/Application Support/Hushtop/inbox\"; mkdir -p \"$d\" && chmod 700 \"$d\"; n=$(basename \"${CLAUDE_PROJECT_DIR:-$PWD}\" | tr -cd '[:alnum:]._ -' | cut -c1-80); a=$(printf '%s' \"${__CFBundleIdentifier:-}\" | tr -cd '[:alnum:].-' | cut -c1-120); t=$(printf '%s' \"${TERM_PROGRAM:-}\" | tr -cd '[:alnum:]._+-' | cut -c1-40); y=$(ps -o tty= -p $PPID 2>/dev/null | tr -cd '[:alnum:]' | cut -c1-12); s=$( (head -c 65536; cat >/dev/null) | tr -d '\\n' | sed -n 's/.*\"session_id\"[[:space:]]*:[[:space:]]*\"\\([A-Za-z0-9-]*\\)\".*/\\1/p' | cut -c1-64); f=\"claude-$$-$(date +%s).json\"; printf '{\"agent\":\"claude\",\"project\":\"%s\",\"event\":\"start\",\"app\":\"%s\",\"term\":\"%s\",\"session\":\"%s\",\"tty\":\"%s\"}' \"$n\" \"$a\" \"$t\" \"$s\" \"$y\" > \"$d/.$f.tmp\" && mv \"$d/.$f.tmp\" \"$d/$f\"; } >/dev/null 2>&1; exit 0 # mynotch-hook"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -x '/Applications/Hushtop.app/Contents/Helpers/mynotch-statusline' ]; then exec '/Applications/Hushtop.app/Contents/Helpers/mynotch-statusline' claude-ask; fi # mynotch-ask",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  }
+}

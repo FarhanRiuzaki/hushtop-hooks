@@ -1,0 +1,8 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "if [ -x '/Applications/Hushtop.app/Contents/Helpers/mynotch-statusline' ]; then exec '/Applications/Hushtop.app/Contents/Helpers/mynotch-statusline' --wrap '~/.claude/statusline.sh'; else exec /bin/sh -c '~/.claude/statusline.sh'; fi # mynotch-statusline",
+    "padding": 0,
+    "refreshInterval": 30
+  }
+}
